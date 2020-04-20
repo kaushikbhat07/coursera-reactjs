@@ -6,9 +6,6 @@ class DishDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            list: null
-        }
     }
 
     renderDish(dishdetail) {
@@ -52,20 +49,22 @@ class DishDetail extends Component {
     render() {
         if (this.props.detail != null) {
             return (
-                <div className="row">
-                    <div className="col-12 col-md-5 mt-5">
-                        {this.renderDish(this.props.detail)}
-                    </div>
-                    <div className="col-12 col-md-5 mt-5">
-                        <h4>Comments</h4>
-                        {this.renderComments(this.props.detail)}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-md-5 mt-5">
+                            {this.renderDish(this.props.detail)}
+                        </div>
+                        <div className="col-12 col-md-5 mt-5">
+                            <h4>Comments</h4>
+                            {this.renderComments(this.props.detail)}
+                        </div>
                     </div>
                 </div>
             );
         }
         else {
             return (
-                <div></div >
+                <div></div>
             );
         }
     }
