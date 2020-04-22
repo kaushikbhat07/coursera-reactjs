@@ -38,3 +38,10 @@ address {
 .navbar-dark {
 	background-color: #512DA8;
 }
+.leaders p.designation {
+	font-weight: 500;
+	font-size: 21px;
+}
+.leaders p.leader-title {
+	font-weight: 600;
+}
