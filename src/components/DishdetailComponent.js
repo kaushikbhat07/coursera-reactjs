@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import CommentForm from './CommentFormComponent' ;
+import CommentForm from './CommentFormComponent';
 
 function RenderDish({ dishdetail }) {
     return (
@@ -14,7 +14,7 @@ function RenderDish({ dishdetail }) {
         </Card>
     );
 }
-function RenderComments({ com }) {
+function RenderComments({ com, addComment, dishId }) {
     return (
         <Card>
             <CardBody>
@@ -32,7 +32,7 @@ function RenderComments({ com }) {
                         }
                     </ul>
                 </CardText>
-                <CommentForm/>
+                <CommentForm dishId={dishId} addComment={addComment} />
             </CardBody>
         </Card>
     );
@@ -62,7 +62,9 @@ const DishDetail = (props) => {
                         <RenderDish dishdetail={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments com={props.comments} />
+                        <RenderComments com={props.comments}
+                            addComment={props.addComment}
+                            dishId={props.dish.id} />
                     </div>
                 </div>
             </div>
