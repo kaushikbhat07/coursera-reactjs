@@ -4,16 +4,23 @@ import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({ dishdetail }) {
     return (
-        <Card>
-            <CardImg top src={baseUrl + dishdetail.image} alt={dishdetail.name} />
-            <CardBody>
-                <CardTitle>{dishdetail.name}</CardTitle>
-                <CardText>{dishdetail.description}</CardText>
-            </CardBody>
-        </Card>
+        <FadeTransform
+            in
+            transformProps={{
+                exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
+            <Card>
+                <CardImg top src={baseUrl + dishdetail.image} alt={dishdetail.name} />
+                <CardBody>
+                    <CardTitle>{dishdetail.name}</CardTitle>
+                    <CardText>{dishdetail.description}</CardText>
+                </CardBody>
+            </Card>
+        </FadeTransform>
     );
 }
 function RenderComments({ comments, postComment, dishId }) {
@@ -22,16 +29,20 @@ function RenderComments({ comments, postComment, dishId }) {
             <CardBody>
                 <CardText>
                     <ul className="comment-list">
-                        {
-                            comments.map((sub) => {
-                                return (
-                                    <li key={sub.id}>
-                                        <p>{sub.comment}</p>
-                                        <p>-- {sub.author}, {displayDate(sub.date)}</p>
-                                    </li>
-                                );
-                            })
-                        }
+                        <Stagger in>
+                            {
+                                comments.map((sub) => {
+                                    return (
+                                        <Fade in>
+                                            <li key={sub.id}>
+                                                <p>{sub.comment}</p>
+                                                <p>-- {sub.author}, {displayDate(sub.date)}</p>
+                                            </li>
+                                        </Fade>
+                                    );
+                                })
+                            }
+                        </Stagger>
                     </ul>
                 </CardText>
                 <CommentForm dishId={dishId} postComment={postComment} />
